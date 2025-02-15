@@ -6,7 +6,6 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** HttpProxyPlugin */
 public class HttpProxyPlugin implements FlutterPlugin, MethodCallHandler {
@@ -31,8 +30,9 @@ public class HttpProxyPlugin implements FlutterPlugin, MethodCallHandler {
   // them functionally equivalent. Only one of onAttachedToEngine or registerWith will be called
   // depending on the user's project. onAttachedToEngine or registerWith must both be defined
   // in the same class.
-  public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "com.lm.http.proxy");
+  @Deprecated
+  public static void registerWith(io.flutter.plugin.common.BinaryMessenger messenger) {
+    final MethodChannel channel = new MethodChannel(messenger, "com.lm.http.proxy");
     channel.setMethodCallHandler(new HttpProxyPlugin());
   }
 
